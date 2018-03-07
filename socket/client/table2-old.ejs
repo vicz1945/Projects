@@ -1,0 +1,378 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Augment Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+    </script>
+    
+    <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <link href="css/style-old.css" rel='stylesheet' type='text/css' />
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rancho" rel="stylesheet">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script>
+
+        var socket = io.connect();
+
+        socket.on('connect', function () {
+         console.log("Client Connected");
+        });
+        
+        socket.on('connect', function () {
+         console.log("Client Connected");
+         socket.emit('logged', {"tableid":2});
+        });
+
+        socket.on('message', function (msg) {
+          //$scope.messages.push(msg);
+          //$scope.$apply();
+        });
+
+    </script>
+    
+    <script>
+        $( document ).ready(function() {
+           
+        });
+    </script>
+    
+    <style>
+    	.page-container{color:white}
+    	.top_menu{color:white}
+		.profile_details{float:left}
+		.user-details{margin:-22px 4.8em 0 3em}
+		.user-details h2{font-size:56px}
+		.outter-wp{margin-bottom:0px}
+		.user-info{float:left; width:89%}
+		.cart-info{float:left; margin-top: 5px; margin-bottom: 10px;}
+    	.item-image{width:85%}
+    	.item-table{margin-top:10%; margin-left:9%; width:82%; margin-bottom:92%}
+    	.item-table .dev-col{padding:25px; margin-bottom:5%}
+    	.item-table .col-md-6{padding-top:10px}
+    	.item-table h2, .item-table h1{margin-top:0px; margin-bottom:0px}
+    	.item-table .fa{color:white}
+    	.item-table input[type="text"]{color:black}
+    	#myModal table{text-align:center; font-size:22px}
+    	.modal-header .close{font-size:60px}
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+         <div class="inner-content">
+             <div class="outter-wp">
+             	<div class="bottom-grids">
+	             	<div class="top_menu">
+	           			<div class="user-details">
+	               			<div class="user-info">
+	               				<h2><span>Welcome, +91 9937009697</span></h2>
+	               			</div>
+	               			<div class="cart-info">
+	        					<img class="cart-image" src="images/shopping-cart-128.png" style="width:50%"><span class="item-updater" style="position:absolute">0</span>
+	               			</div>
+	           			</div>
+	           			<div class="clearfix"></div>
+	       			</div>
+					<div class="item-table">
+						<div align="center" style="font-size:120px">
+							<span>Menu</span>  
+						</div>
+						<div id="1" class="col-md-4 dev-col items">                                    
+	                      	<table>
+								<tr><td colspan="2" align="center"><img class="item-image" src="images/cutting.png"></td></tr>
+								<tr><td colspan="2" align="center"><h1 class="name">Malai Chai</h1></td></tr>
+								<tr>
+									<td class="col-md-6" align="center"><h2>Price :</h2></td>
+									<td class="col-md-6"><img src="images/indian_rupee_sign_currency_symbol-512-white.png" style="width:15%;float:left">&nbsp;<h2 class="item-price" style="float:left">35</h2></td>
+								</tr>
+								<tr>
+									<td class="col-md-6" align="center"><h2>Qty :</h2></td>
+									<td class="col-md-6">
+										<a class="minus" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+										<input type="text" id="input-value-1" value=0 style="width:40%; text-align:center">
+										<a class="plus" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
+									</td>
+								</tr>
+								<tr><td colspan="2" align="center"><button class="btn btn-default add-to-cart">Add to Cart</button></td></tr>
+							</table>
+						</div>
+						<div id="2" class="col-md-4 dev-col items">                                    
+	                      	<table>
+								<tr><td colspan="2" align="center"><img class="item-image" src="images/cutting.png"></td></tr>
+								<tr><td colspan="2" align="center"><h1 class="name">Kesar Chai</h1></td></tr>
+								<tr>
+									<td class="col-md-6" align="center"><h2>Price :</h2></td>
+									<td class="col-md-6"><img src="images/indian_rupee_sign_currency_symbol-512-white.png" style="width:15%;float:left">&nbsp;<h2 class="item-price" style="float:left">35</h2></td>
+								</tr>
+								<tr>
+									<td class="col-md-6" align="center"><h2>Qty :</h2></td>
+									<td class="col-md-6">
+										<a class="minus" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+										<input type="text" id="input-value-2" value=0 style="width:40%; text-align:center">
+										<a class="plus" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
+									</td>
+								</tr>
+								<tr><td colspan="2" align="center"><button class="btn btn-default add-to-cart">Add to Cart</button></td></tr>
+							</table>
+						</div>
+						<div id="3" class="col-md-4 dev-col items">                                    
+	                      	<table>
+								<tr><td colspan="2" align="center"><img class="item-image" src="images/cutting.png"></td></tr>
+								<tr><td colspan="2" align="center"><h1 class="name">Oreo Shake</h1></td></tr>
+								<tr>
+									<td class="col-md-6" align="center"><h2>Price :</h2></td>
+									<td class="col-md-6"><img src="images/indian_rupee_sign_currency_symbol-512-white.png" style="width:15%;float:left">&nbsp;<h2 class="item-price" style="float:left">85</h2></td>
+								</tr>
+								<tr>
+									<td class="col-md-6" align="center"><h2>Qty :</h2></td>
+									<td class="col-md-6">
+										<a class="minus" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+										<input type="text" id="input-value-3" value=0 style="width:40%; text-align:center">
+										<a class="plus" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
+									</td>
+								</tr>
+								<tr><td colspan="2" align="center"><button class="btn btn-default add-to-cart">Add to Cart</button></td></tr>
+							</table>
+						</div>
+						<div id="4" class="col-md-4 dev-col items">                                    
+	                      	<table>
+								<tr><td colspan="2" align="center"><img class="item-image" src="images/cutting.png"></td></tr>
+								<tr><td colspan="2" align="center"><h1 class="name">Malai Lassi</h1></td></tr>
+								<tr>
+									<td class="col-md-6" align="center"><h2>Price :</h2></td>
+									<td class="col-md-6"><img src="images/indian_rupee_sign_currency_symbol-512-white.png" style="width:15%;float:left">&nbsp;<h2 class="item-price" style="float:left">39</h2></td>
+								</tr>
+								<tr>
+									<td class="col-md-6" align="center"><h2>Qty :</h2></td>
+									<td class="col-md-6">
+										<a class="minus" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+										<input type="text" id="input-value-4" value=0 style="width:40%; text-align:center">
+										<a class="plus" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
+									</td>
+								</tr>
+								<tr><td colspan="2" align="center"><button class="btn btn-default add-to-cart">Add to Cart</button></td></tr>
+							</table>
+						</div>
+						<div id="5" class="col-md-4 dev-col items">                                    
+	                      	<table>
+								<tr><td colspan="2" align="center"><img class="item-image" src="images/cutting.png"></td></tr>
+								<tr><td colspan="2" align="center"><h1 class="name">Namkeen Chach</h1></td></tr>
+								<tr>
+									<td class="col-md-6" align="center"><h2>Price :</h2></td>
+									<td class="col-md-6"><img src="images/indian_rupee_sign_currency_symbol-512-white.png" style="width:15%;float:left">&nbsp;<h2 class="item-price" style="float:left">30</h2></td>
+								</tr>
+								<tr>
+									<td class="col-md-6" align="center"><h2>Qty :</h2></td>
+									<td class="col-md-6">
+										<a class="minus" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+										<input type="text" id="input-value-5" value=0 style="width:40%; text-align:center">
+										<a class="plus" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
+									</td>
+								</tr>
+								<tr><td colspan="2" align="center"><button class="btn btn-default add-to-cart">Add to Cart</button></td></tr>
+							</table>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+             </div>
+         </div>
+        <div class="clearfix"></div>
+    </div>
+    
+    <!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h1 class="modal-title">Cart Items</h1>
+	      </div>
+	      <div class="modal-body">
+	      	<table id="cart-table" class="table table-bordred table-striped">
+	      		<!-- <tr>
+	      			<td class="col-md-3"><img class="item-image" src="images/cutting.png" style="width:25%"></td>
+	      			<td class="col-md-3"><span>Malai Chai</span></td>
+	      			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;35 X 2</td>
+	      			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;70</td>
+	      		</tr>
+	      		<tr>
+	      			<td class="col-md-3"><img class="item-image" src="images/cutting.png" style="width:25%"></td>
+	      			<td class="col-md-3"><span>Malai Chai</span></td>
+	      			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;35 X 2</td>
+	      			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;70</td>
+	      		</tr>
+	      		<tr>
+	      			<td class="col-md-3"><img class="item-image" src="images/cutting.png" style="width:25%"></td>
+	      			<td class="col-md-3"><span>Malai Chai</span></td>
+	      			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;35 X 2</td>
+	      			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;70</td>
+	      		</tr> -->
+	      	</table>
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-default" id ="placeOrder">Proceed to Checkout</button>
+	      </div>
+	    </div>
+	
+	  </div>
+	</div>
+
+	<script>
+	
+			var isReorder = false;
+		function incrementValue(id, inc){
+			var tobFind	=	'#input-value-'+id;
+			var valueElement = $('.item-table').find(tobFind);
+	        valueElement.val(Math.max(parseInt(valueElement.val()) + inc, 0));
+	        return false;
+	    }
+	
+		$('.plus').bind('click', function(e){
+			e.preventDefault();
+			var attrId	=	$(this).parents('.items').attr('id');
+			var increment	=	1;
+			incrementValue(attrId, increment);
+		});
+		
+		$('.minus').bind('click', function(e){
+			e.preventDefault();
+			var attrId	=	$(this).parents('.items').attr('id');
+			var decrement	=	-1;
+			incrementValue(attrId, decrement);
+		});
+
+		var cartItems	=	[];
+		
+		$('.add-to-cart').click(function(e){
+			var itemId			=	$(this).parents('.items').attr('id');
+			var qty				=	$(this).parents('.items').children().find('#input-value-'+itemId).val();
+			
+			var cartItem		=	{
+					"name"		:	$(this).parents('.items').children().find('.name').text(),
+					"attrId"	:	$(this).parents('.items').attr('id'),
+					"imgId"		:	$(this).parents('.items').children().find('img').attr('src'),
+					"qty"		:	$(this).parents('.items').children().find('#input-value-'+itemId).val(),
+					"price"		:	$(this).parents('.items').children().find('.item-price').text()
+			};
+			
+			$(this).parents('.items').children().find('#input-value-'+itemId).val(0);
+			
+			var foundItem	=	-1;
+			if(qty > 0){
+				for(var i=0; i<cartItems.length; i++){
+					console.log(cartItems[i]);
+					if(cartItems[i].attrId	==	itemId){
+						foundItem	=	i;
+						console.log(foundItem);
+					}
+				}
+				
+				if(foundItem != -1) {
+					cartItems.splice(foundItem, 1);
+				}
+				
+				cartItems.push(cartItem);
+				//console.log(cartItems);
+			}else{
+				alert('Please select quantity');
+			}
+			
+			$('.item-updater').text(cartItems.length)
+		});
+		
+		 $("#placeOrder").click(function(){
+		 			
+		 		if(isReorder){
+		 			var orderId = Math.floor((Math.random() * 10000) + 1);
+		 			var details = {"items" : cartItems,"table" : 2,"isReorder" : true,"orderId":orderId};
+		 			console.log(details);
+               	 	socket.emit('message', details);	
+		 		}
+		 		else{
+		 			isReorder = true;
+		 			var orderId = Math.floor((Math.random() * 10000) + 1);
+		 			var details = {"items" : cartItems,"table" : 2,"isReorder" : false,"orderId":orderId};
+		 			console.log(details);
+               	 	socket.emit('message', details);
+		 		}
+         });
+		
+		$('.cart-image').bind('click', function(){
+			$('#myModal').modal();
+			
+			/* <tr>
+  			<td class="col-md-3"><img class="item-image" src="images/cutting.png" style="width:25%"></td>
+  			<td class="col-md-3"><span>Malai Chai</span></td>
+  			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;35 X 2</td>
+  			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;70</td>
+  			</tr> */
+  			$('#cart-table tr').remove();
+  			var str	=	"";
+  			
+  			if(cartItems.length > 0){
+		  		$.each( cartItems, function( key, value ) {
+		  			str	=	str	+	"<tr id="+value.attrId+">";
+		  			str	=	str	+	"<td class='col-md-3'><img class='item-image' src='"+value.imgId+"' style='width:25%'></td>";
+		  			str	=	str	+	"<td class='col-md-3'><span>"+value.name+"</span></td>";
+		  			str	=	str	+	"<td class='col-md-3'><img src='images/indian_rupee_sign_currency_symbol-512.png' style='width:12.5%'>&nbsp;"+value.price+" X "+value.qty+"</td>";
+		  			str	=	str	+	"<td class='col-md-3'><img src='images/indian_rupee_sign_currency_symbol-512.png' style='width:12.5%'>&nbsp;"+ parseInt(value.price)*parseInt(value.qty) +"</td>";
+		  			str	=	str	+	"<td><a class='cart-delete' id='123'><i class='fa fa-trash-o' aria-hidden='true'></i></a></td>"
+		  			str	=	str	+	"</tr>";
+		  		});
+  			}else{
+  				str	=	str	+	"<tr>";
+  				str	=	str	+	"<td>No items to show. Please add items to cart using 'Add to Cart' button<td>";
+  				str	=	str	+	"</tr>";
+  			}
+	  		//console.log(str);
+	  		$('#cart-table').append(str);
+		});
+		
+		$(document).on('click', 'a.cart-delete', function() {
+			var itemId	=	$(this).parents('tr').attr('id');
+			
+			for(var i=0; i<cartItems.length; i++){
+				console.log(cartItems[i]);
+				if(cartItems[i].attrId	==	itemId){
+					foundItem	=	i;
+					console.log(foundItem);
+				}
+			}
+			
+			if(foundItem != -1) {
+				cartItems.splice(foundItem, 1);
+			}
+			
+			$(this).parents('tr').remove();
+			
+			console.log(cartItems);
+			var str	=	"";
+			if(cartItems.length == 0){
+				str	=	str	+	"<tr>";
+  				str	=	str	+	"<td>No items to show. Please add items to cart using 'Add to Cart' button<td>";
+  				str	=	str	+	"</tr>";
+  				$('#cart-table').append(str);
+			}
+			$('.item-updater').text(cartItems.length)
+		}); 
+		
+	</script>
+    <script type="text/javascript" src="js/TweenLite.min.js"></script>
+    <script type="text/javascript" src="js/CSSPlugin.min.js"></script>
+    <script src="js/jquery.nicescroll.js"></script>
+    <script src="js/scripts.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

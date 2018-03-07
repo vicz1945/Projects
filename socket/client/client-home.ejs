@@ -1,0 +1,788 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Table1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Augment Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+    </script>
+    
+    <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <link href="css/style-old.css" rel='stylesheet' type='text/css' />
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rancho" rel="stylesheet">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script>
+
+
+           
+       
+        var socket = io.connect();
+
+        socket.on('connect', function () {
+         console.log("Client Connected");
+         socket.emit('logged', {"tableid":1});
+        });
+        
+
+        socket.on('message', function (msg) {
+          //$scope.messages.push(msg);
+          //$scope.$apply();
+        });
+        
+
+
+    </script>
+    
+    
+    <style>
+    	.page-container{color:white}
+    	.top_menu{color:white}
+		.profile_details{float:left}
+		.user-details{margin:-22px 4.8em 0 3em}
+		.user-details h3{font-size:56px}
+		.outter-wp{margin-bottom:0px}
+		.user-info{float:left; width:89%}
+		.cart-info{float:left; margin-top: 5px; margin-bottom: 10px;}
+    	.item-image{width:60%}
+    	.item-table{margin-top:5%; margin-left:9%; width:82%; margin-bottom:92%}
+    	.item-table .dev-col{padding:25px; margin-bottom:5%}
+    	.item-table .col-md-6{padding-top:10px}
+    	.item-table h3, .item-table h3{margin-top:0px; margin-bottom:0px}
+    	.item-table .fa{color:white}
+    	.item-table input[type="te xt"]{color:black}
+    	#myModal table{text-align:center; font-size:22px}
+    	.modal-header .close{font-size:60px}
+    	.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover, .nav-tabs>li>a{font-size:24px;color:#00C6D7!important;}
+    	.nav-tabs>li{width:16.66%;text-align:center;}
+    	.nav-tabs>li:nth-child(6)>a{margin-right:0px;}
+    	#order-details .table-striped>tbody>tr:nth-of-type(odd){background-color:none !important}
+    	#order-details>.table{margin-bottom:25px;}
+    	#order-details>.table>tbody>tr>td{vertical-align:middle !important; padding : 5px !important;text-align:center !important;font-size:1.5em!important;color:white!important;}
+    	#order-details>.table>thead>tr>td{font-size:1.5em!important;color:white!important; padding-top:0px !important;padding-bottom:0px !important;}
+    	#order-details>.table>tfoot>tr>td{font-size:1.5em!important;color:white!important}
+    	#order-details>.table>tfoot>tr>td:nth-child(1){text-align:right;border-top:1px solid white !important;color:white!important;padding:0px !important;}
+    	#order-details>.table>tfoot>tr>td:nth-child(2){text-align:center;border-top:1px solid white !important;color:white!important;padding:0px !important;}
+    			.green{background-color:#2ecc71 !important}
+		.yellow{background-color:#f1c40f !important}
+		#items-menu input{color:black;}
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+         <div class="inner-content">
+             <div class="outter-wp">
+             	<div class="bottom-grids">
+	             	<div class="top_menu">
+	           			<div class="user-details">
+	               			<div class="user-info">
+	               				<h3><span>Welcome, +91 9937009697</span></h3>
+	               			</div>
+	               			<div class="cart-info">
+	        					<img class="cart-image" src="images/shopping-cart-128.png" style="width:50%"><span class="item-updater" style="position:absolute">0</span>
+	               			</div>
+	           			</div>
+	           			<div class="clearfix"></div>
+	       			</div>
+					<div id="items-menu" class="item-table">
+						<ul class="nav nav-tabs">
+    						<li class="active"><a data-toggle="tab" href="#menu1">Drinks</a></li>
+    						<li><a data-toggle="tab" href="#menu2">Parathas & Roti</a></li>
+						    <li><a data-toggle="tab" href="#menu3">Sabjiyan</a></li>
+						    <li><a data-toggle="tab" href="#menu4">Snacks</a></li>
+    						<li><a data-toggle="tab" href="#menu5">Sweets & Deserts</a></li>
+						    <li><a data-toggle="tab" href="#menu6">Rice</a></li>
+  						</ul>
+
+  						<div class="tab-content">
+  							<div align="center" style="font-size:56px">
+								<span>Menu</span>  
+							</div>
+    						<div id="menu1" class="tab-pane fade in active">
+								<div id="1" class="col-md-4 dev-col items">                                    
+	                      			<table>
+										<tr><td colspan="2" align="center"><img class="item-image" src="images/cutting.png"></td></tr>
+										<tr><td colspan="2" align="center"><h3 class="name">Malai Chai</h3></td></tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Price :</h3></td>
+											<td class="col-md-6"><img src="images/indian_rupee_sign_currency_symbol-512-white.png" style="width:15%;float:left">&nbsp;<h3 class="item-price" style="float:left">35</h3></td>
+										</tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Qty :</h3></td>
+											<td class="col-md-6">
+												<a class="minus" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+												<input type="text" id="input-value-1" value=0 style="width:40%; text-align:center">
+												<a class="plus" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
+											</td>
+										</tr>
+										<tr><td colspan="2" align="center"><button class="btn btn-default add-to-cart">Add to Cart</button></td></tr>
+									</table>
+								</div>
+								<div id="2" class="col-md-4 dev-col items">                                    
+	                      			<table>
+										<tr><td colspan="2" align="center"><img class="item-image" src="images/cutting.png"></td></tr>
+										<tr><td colspan="2" align="center"><h3 class="name">Kesar Chai</h3></td></tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Price :</h3></td>
+											<td class="col-md-6"><img src="images/indian_rupee_sign_currency_symbol-512-white.png" style="width:15%;float:left">&nbsp;<h3 class="item-price" style="float:left">35</h3></td>
+										</tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Qty :</h3></td>
+											<td class="col-md-6">
+												<a class="minus" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+												<input type="text" id="input-value-2" value=0 style="width:40%; text-align:center">
+												<a class="plus" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
+											</td>
+										</tr>
+										<tr><td colspan="2" align="center"><button class="btn btn-default add-to-cart">Add to Cart</button></td></tr>
+									</table>
+								</div>
+								<div id="3" class="col-md-4 dev-col items">                                    
+	                      			<table>
+										<tr><td colspan="2" align="center"><img class="item-image" src="images/cutting.png"></td></tr>
+										<tr><td colspan="2" align="center"><h3 class="name">Oreo Shake</h3></td></tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Price :</h3></td>
+											<td class="col-md-6"><img src="images/indian_rupee_sign_currency_symbol-512-white.png" style="width:15%;float:left">&nbsp;<h3 class="item-price" style="float:left">85</h3></td>
+										</tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Qty :</h3></td>
+											<td class="col-md-6">
+												<a class="minus" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+												<input type="text" id="input-value-3" value=0 style="width:40%; text-align:center">
+												<a class="plus" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
+											</td>
+										</tr>
+										<tr><td colspan="2" align="center"><button class="btn btn-default add-to-cart">Add to Cart</button></td></tr>
+									</table>
+								</div>
+								<div id="4" class="col-md-4 dev-col items">                                    
+	                      			<table>
+										<tr><td colspan="2" align="center"><img class="item-image" src="images/cutting.png"></td></tr>
+										<tr><td colspan="2" align="center"><h3 class="name">Malai Lassi</h3></td></tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Price :</h3></td>
+											<td class="col-md-6"><img src="images/indian_rupee_sign_currency_symbol-512-white.png" style="width:15%;float:left">&nbsp;<h3 class="item-price" style="float:left">39</h3></td>
+										</tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Qty :</h3></td>
+											<td class="col-md-6">
+												<a class="minus" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+												<input type="text" id="input-value-4" value=0 style="width:40%; text-align:center">
+												<a class="plus" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
+											</td>
+										</tr>
+										<tr><td colspan="2" align="center"><button class="btn btn-default add-to-cart">Add to Cart</button></td></tr>
+									</table>
+								</div>
+								<div id="5" class="col-md-4 dev-col items">                                    
+	                      			<table>
+										<tr><td colspan="2" align="center"><img class="item-image" src="images/cutting.png"></td></tr>
+										<tr><td colspan="2" align="center"><h3 class="name">Namkeen Chach</h3></td></tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Price :</h3></td>
+											<td class="col-md-6"><img src="images/indian_rupee_sign_currency_symbol-512-white.png" style="width:15%;float:left">&nbsp;<h3 class="item-price" style="float:left">30</h3></td>
+										</tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Qty :</h3></td>
+											<td class="col-md-6">
+												<a class="minus" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+												<input type="text" id="input-value-5" value=0 style="width:40%; text-align:center">
+												<a class="plus" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
+											</td>
+										</tr>
+										<tr><td colspan="2" align="center"><button class="btn btn-default add-to-cart">Add to Cart</button></td></tr>
+									</table>
+								</div>
+    						</div>
+    						<div id="menu2" class="tab-pane fade">
+     							<div id="6" class="col-md-4 dev-col items">                                    
+	                      			<table>
+										<tr><td colspan="2" align="center"><img class="item-image" src="http://www.helloparatha.com/img/paneer-paratha.png"></td></tr>
+										<tr><td colspan="2" align="center"><h3 class="name">Kuch Bhi Paratha</h3></td></tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Price :</h3></td>
+											<td class="col-md-6"><img src="images/indian_rupee_sign_currency_symbol-512-white.png" style="width:15%;float:left">&nbsp;<h3 class="item-price" style="float:left">45</h3></td>
+										</tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Qty :</h3></td>
+											<td class="col-md-6">
+												<a class="minus" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+												<input type="text" id="input-value-6" value=0 style="width:40%; text-align:center">
+												<a class="plus" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
+											</td>
+										</tr>
+										<tr><td colspan="2" align="center"><button class="btn btn-default add-to-cart">Add to Cart</button></td></tr>
+									</table>
+								</div>
+								<div id="7" class="col-md-4 dev-col items">                                    
+	                      			<table>
+										<tr><td colspan="2" align="center"><img class="item-image" src="http://www.helloparatha.com/img/paneer-paratha.png"></td></tr>
+										<tr><td colspan="2" align="center"><h3 class="name">Matar Paratha</h3></td></tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Price :</h3></td>
+											<td class="col-md-6"><img src="images/indian_rupee_sign_currency_symbol-512-white.png" style="width:15%;float:left">&nbsp;<h3 class="item-price" style="float:left">49</h3></td>
+										</tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Qty :</h3></td>
+											<td class="col-md-6">
+												<a class="minus" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+												<input type="text" id="input-value-7" value=0 style="width:40%; text-align:center">
+												<a class="plus" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
+											</td>
+										</tr>
+										<tr><td colspan="2" align="center"><button class="btn btn-default add-to-cart">Add to Cart</button></td></tr>
+									</table>
+								</div>
+								<div id="8" class="col-md-4 dev-col items">                                    
+	                      			<table>
+										<tr><td colspan="2" align="center"><img class="item-image" src="http://www.helloparatha.com/img/paneer-paratha.png"></td></tr>
+										<tr><td colspan="2" align="center"><h3 class="name">Jugaad Paratha</h3></td></tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Price :</h3></td>
+											<td class="col-md-6"><img src="images/indian_rupee_sign_currency_symbol-512-white.png" style="width:15%;float:left">&nbsp;<h3 class="item-price" style="float:left">35</h3></td>
+										</tr>
+										<tr>
+											<td class="col-md-6" align="center"><h3>Qty :</h3></td>
+											<td class="col-md-6">
+												<a class="minus" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+												<input type="text" id="input-value-8" value=0 style="width:40%; text-align:center">
+												<a class="plus" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>	
+											</td>
+										</tr>
+										<tr><td colspan="2" align="center"><button class="btn btn-default add-to-cart">Add to Cart</button></td></tr>
+									</table>
+								</div>
+    						</div>
+    						<div id="menu3" class="tab-pane fade">
+      							<h3>No Items Available</h3>
+    						</div>
+    						<div id="menu4" class="tab-pane fade">
+      							<h3>No Items Available</h3>
+    						</div>
+    						<div id="menu5" class="tab-pane fade">
+      							<h3>No Items Available</h3>
+    						</div>
+    						<div id="menu6" class="tab-pane fade">
+      							<h3>No Items Available</h3>
+    						</div>
+    						<div id="menu7" class="tab-pane fade">
+      							<h3>No Items Available</h3>
+    						</div>
+  						</div>
+					</div>
+					
+					<div id="order-details" class="item-table">
+						<div align="center" style="font-size:56px">
+							<span>Order Details</span>  
+						</div>
+						<table id = "delivered" class="table table-bordred">
+							
+	      				</table>
+						<table id = "process" class="table table-bordred">
+							
+	      				</table>
+	      				
+	      				<table id = "total" class="table table-bordred">
+							
+	      				</table>
+	      				
+	      				<div class="btns" align="center">
+	      					<button class="btn btn-default want-more"><h1>Want More?</h1></button>
+	      					<button class="btn btn-default give-up"><h1>I Give Up</h1></button>
+	      				</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+             </div>
+         </div>
+        <div class="clearfix"></div>
+    </div>
+    
+    <!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h3 class="modal-title">Cart Items</h3>
+	      </div>
+	      <div class="modal-body">
+	      	<table id="cart-table" class="table table-bordred table-striped">
+	      		<!-- <tr>
+	      			<td class="col-md-3"><img class="item-image" src="images/cutting.png" style="width:25%"></td>
+	      			<td class="col-md-3"><span>Malai Chai</span></td>
+	      			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;35 X 2</td>
+	      			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;70</td>
+	      		</tr>
+	      		<tr>
+	      			<td class="col-md-3"><img class="item-image" src="images/cutting.png" style="width:25%"></td>
+	      			<td class="col-md-3"><span>Malai Chai</span></td>
+	      			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;35 X 2</td>
+	      			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;70</td>
+	      		</tr>
+	      		<tr>
+	      			<td class="col-md-3"><img class="item-image" src="images/cutting.png" style="width:25%"></td>
+	      			<td class="col-md-3"><span>Malai Chai</span></td>
+	      			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;35 X 2</td>
+	      			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;70</td>
+	      		</tr> -->
+	      	</table>
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-default" id ="placeOrder">Proceed to Checkout</button>
+	      </div>
+	    </div>
+	
+	  </div>
+	</div>
+	
+	<div id="myModal2" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <!--<h3 class="modal-title">Cart Items</h3>-->
+	      </div>
+	      <div class="modal-body">
+	      	<table id="" class="table table-bordred table-striped">
+	      		<thead>
+	      			
+	      		</thead>
+	      		<tbody>
+	      			<span style="font-size:30px;">Thank you for visiting! See you soon</span>
+	      		</tbody>
+	      	</table>
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-default" id ="Okbutton">Ok</button>
+	      </div>
+	    </div>
+	
+	  </div>
+	</div>
+
+	<script>
+		$('#order-details').hide();
+	
+		var isReorder = false;
+		var allOrders = [];
+		var deliverOrder = [];
+		
+		function incrementValue(id, inc){
+			var tobFind	=	'#input-value-'+id;
+			var valueElement = $('.item-table').find(tobFind);
+	        valueElement.val(Math.max(parseInt(valueElement.val()) + inc, 0));
+	        return false;
+	    }
+	
+		$(document).on('click', '.plus', function(e){
+			e.preventDefault();
+			var attrId	=	$(this).parents('.items').attr('id');
+			var increment	=	1;
+			incrementValue(attrId, increment);
+		});
+		
+		$(document).on('click', '.minus', function(e){
+			e.preventDefault();
+			var attrId	=	$(this).parents('.items').attr('id');
+			var decrement	=	-1;
+			incrementValue(attrId, decrement);
+		});
+
+		var cartItems	=	[];
+		
+		
+		
+		$('.add-to-cart').click(function(e){
+			var itemId			=	$(this).parents('.items').attr('id');
+			var qty				=	$(this).parents('.items').children().find('#input-value-'+itemId).val();
+			
+			var cartItem		=	{
+					"name"		:	$(this).parents('.items').children().find('.name').text(),
+					"attrId"	:	$(this).parents('.items').attr('id'),
+					"imgId"		:	$(this).parents('.items').children().find('img').attr('src'),
+					"qty"		:	$(this).parents('.items').children().find('#input-value-'+itemId).val(),
+					"price"		:	$(this).parents('.items').children().find('.item-price').text()
+			};
+			
+			$(this).parents('.items').children().find('#input-value-'+itemId).val(0);
+			
+			var foundItem	=	-1;
+			if(qty > 0){
+				for(var i=0; i<cartItems.length; i++){
+					console.log(cartItems[i]);
+					if(cartItems[i].attrId	==	itemId){
+						foundItem	=	i;
+						console.log(foundItem);
+					}
+				}
+				
+				if(foundItem != -1) {
+					cartItems.splice(foundItem, 1);
+				}
+				
+				cartItems.push(cartItem);
+				
+				//console.log(cartItems);
+			}else{
+				alert('Please select quantity');
+			}
+			
+			$('.item-updater').text(cartItems.length)
+		});
+		
+		
+		socket.on('deliver', function (msg) {
+			//alert(msg);
+			deliverOrder.push(parseInt(msg));
+			console.log(deliverOrder);
+			var str1 = "";
+			for(var i = 0; i <allOrders.length ; i++){
+		 		var curOrder = allOrders[i];
+		 		if((jQuery.inArray(curOrder.orderId, deliverOrder) != -1)){
+			 	str1 = str1 + "<thead>";
+			 	str1 = str1 + "<tr class='green'>";
+			 	str1 = str1 + "	<td colspan='2' align='left'>Order Id : "+curOrder.orderId+"</td>";
+			 	str1 = str1 +"<td colspan='2' align='right'>Order Status : Delivered</td>";
+			 	str1 = str1 + "</tr>";
+			 	str1 = str1 +"</thead>";
+			 	str1 = str1 + "<tbody>";
+			 	var items = curOrder.items;
+			 	var total = 0 ;
+	      		for(var j = 0 ; j < items.length; j++ ){
+				 	str1 = str1 + "<tr>";
+				 	str1 = str1 + "<td class='col-md-3'<img class='item-image' src='images/cutting.png' style='width:10%'></td>";
+				 	str1 = str1 + "<td class='col-md-3'><span>"+items[j].name+"</span></td>";
+				 	str1 = str1 + "<td class='col-md-3'><img src='images/indian_rupee_sign_currency_symbol-512-white.png' style='width:7.5%'>&nbsp;"+items[j].price+"X" +items[j].qty+"</td>";
+				 	str1 = str1 + "<td class='col-md-3'><img src='images/indian_rupee_sign_currency_symbol-512-white.png' style='width:7.5%'>&nbsp;"+(items[j].price*items[j].qty)+"</td>";
+				 	str1 = str1 + "</tr>";
+				 	total = total + (items[j].price*items[j].qty);
+	      		}
+			 	/*str1 = str1 +"</tbody>";
+			 	str1 = str1 + "<tfoot>";
+			 	str1 = str1 +"<tr>";
+			 	str1 = str1 +"<td colspan='3'>";
+			 	str1 = str1 + "<span>Total : </span>";
+				str1 = str1 +"</td>";
+				str1 = str1 + "<td>";
+				str1 = str1 + "<span><img src='images/indian_rupee_sign_currency_symbol-512-white.png' style='width:7.5%'>&nbsp;1310</span>";
+				str1 = str1 + "</tr>";
+				str1 = str1 + "</tfoot>";*/
+		 		}
+		 	}
+		 	
+		 	$("#delivered").empty();
+			$("#delivered").append(str1);
+			
+			
+			//In Process
+		 str1 = "";
+			for(var i = 0; i <allOrders.length ; i++){
+		 		var curOrder = allOrders[i];
+		 		if((jQuery.inArray(curOrder.orderId, deliverOrder) == -1)){
+			 	str1 = str1 + "<thead>";
+			 	str1 = str1 + "<tr class='yellow'>";
+			 	str1 = str1 + "	<td colspan='2' align='left'>Order Id : "+curOrder.orderId+"</td>";
+			 	str1 = str1 +"<td colspan='2' align='right'>Order Status : In Process</td>";
+			 	str1 = str1 + "</tr>";
+			 	str1 = str1 +"</thead>";
+			 	str1 = str1 + "<tbody>";
+			 	var items = curOrder.items;
+			 	var total = 0 ;
+	      		for(var j = 0 ; j < items.length; j++ ){
+				 	str1 = str1 + "<tr>";
+				 	str1 = str1 + "<td class='col-md-3'<img class='item-image' src='images/cutting.png' style='width:10%'></td>";
+				 	str1 = str1 + "<td class='col-md-3'><span>"+items[j].name+"</span></td>";
+				 	str1 = str1 + "<td class='col-md-3'><img src='images/indian_rupee_sign_currency_symbol-512-white.png' style='width:7.5%'>&nbsp;"+items[j].price+"X" +items[j].qty+"</td>";
+				 	str1 = str1 + "<td class='col-md-3'><img src='images/indian_rupee_sign_currency_symbol-512-white.png' style='width:7.5%'>&nbsp;"+(items[j].price*items[j].qty)+"</td>";
+				 	str1 = str1 + "</tr>";
+				 	total = total + (items[j].price*items[j].qty);
+	      		}
+			 /*	str1 = str1 +"</tbody>";
+			 	str1 = str1 + "<tfoot>";
+			 	str1 = str1 +"<tr>";
+			 	str1 = str1 +"<td colspan='3'>";
+			 	str1 = str1 + "<span>Total : </span>";
+				str1 = str1 +"</td>";
+				str1 = str1 + "<td>";
+				str1 = str1 + "<span><img src='images/indian_rupee_sign_currency_symbol-512-white.png' style='width:7.5%'>&nbsp;1310</span>";
+				str1 = str1 + "</tr>";
+				str1 = str1 + "</tfoot>";*/
+		 		}
+		 	}
+			
+			$("#process").empty();
+			$("#process").append(str1);
+			
+			var total = 0 ;						
+			for(var i = 0; i <allOrders.length ; i++){
+		 		var curOrder = allOrders[i];
+		 		var items = curOrder.items;
+
+	      		for(var j = 0 ; j < items.length; j++ ){
+	      			total = total + (items[j].price*items[j].qty);	
+	      		}	
+		 		
+			}
+			
+			str1 = str1 + "<thead>";
+			str1 = str1 + "<tr class='green'>";
+			str1 = str1 +"<td colspan='2' align='right'>Total: "+total+"</td>";
+			str1 = str1 + "</tr>";
+			str1 = str1 +"</thead>";
+							
+			$("#total").empty();
+			$("#total").append(str1);
+			
+		});
+		
+		//Socket Send
+		 $("#placeOrder").click(function(){
+		 		
+		 		if(isReorder){
+		 			var orderId = Math.floor((Math.random() * 10000) + 1);
+		 			var details = {"items" : cartItems,"table" : 1,"isReorder" : true,"orderId":orderId};
+		 			console.log(details);
+		 			allOrders.push(details);
+               	 	socket.emit('message', details);	
+		 		}
+		 		else{
+		 			isReorder = true;
+		 			var orderId = Math.floor((Math.random() * 10000) + 1);
+		 			var details = {"items" : cartItems,"table" : 1,"isReorder" : false,"orderId":orderId};
+		 			console.log(details);
+		 			allOrders.push(details);
+               	 	socket.emit('message', details);
+		 		}
+		 	
+		 	$('#items-menu').hide();
+		 	
+		 	var str1 = "";
+		 	for(var i = 0; i <allOrders.length ; i++){
+		 		var curOrder = allOrders[i];
+		 		if((jQuery.inArray(curOrder.orderId, deliverOrder) == -1)){
+			 	str1 = str1 + "<thead>";
+			 	str1 = str1 + "<tr class='yellow'>";
+			 	str1 = str1 + "	<td colspan='2' align='left'>Order Id : "+curOrder.orderId+"</td>";
+			 	str1 = str1 +"<td colspan='2' align='right'>Order Status : In Process</td>";
+			 	str1 = str1 + "</tr>";
+			 	str1 = str1 +"</thead>";
+			 	str1 = str1 + "<tbody>";
+			 	var items = curOrder.items;
+			 	var total = 0 ;
+	      		for(var j = 0 ; j < items.length; j++ ){
+				 	str1 = str1 + "<tr>";
+				 	str1 = str1 + "<td class='col-md-3'<img class='item-image' src='images/cutting.png' style='width:10%'></td>";
+				 	str1 = str1 + "<td class='col-md-3'><span>"+items[j].name+"</span></td>";
+				 	str1 = str1 + "<td class='col-md-3'><img src='images/indian_rupee_sign_currency_symbol-512-white.png' style='width:7.5%'>&nbsp;"+items[j].price+"X" +items[j].qty+"</td>";
+				 	str1 = str1 + "<td class='col-md-3'><img src='images/indian_rupee_sign_currency_symbol-512-white.png' style='width:7.5%'>&nbsp;"+(items[j].price*items[j].qty)+"</td>";
+				 	str1 = str1 + "</tr>";
+				 	total = total + (items[j].price*items[j].qty);
+	      		}
+			 	
+			 /*	str1 = str1 +"</tbody>";
+			 	str1 = str1 + "<tfoot>";
+			 	str1 = str1 +"<tr>";
+			 	str1 = str1 +"<td colspan='3'>";
+			 	str1 = str1 + "<span>Total : </span>";
+				str1 = str1 +"</td>";
+				str1 = str1 + "<td>";
+				str1 = str1 + "<span><img src='images/indian_rupee_sign_currency_symbol-512-white.png' style='width:7.5%'>&nbsp;"+total+"</span>";
+				str1 = str1 + "</tr>";
+				str1 = str1 + "</tfoot>";*/
+		 	}
+		 	}
+			
+			$("#process").empty();
+			$("#process").append(str1);
+			
+			
+			str1 = "";
+		 	for(var i = 0; i <allOrders.length ; i++){
+		 		var curOrder = allOrders[i];
+		 		if((jQuery.inArray(curOrder.orderId, deliverOrder) != -1)){
+			 	str1 = str1 + "<thead>";
+			 	str1 = str1 + "<tr class='green'>";
+			 	str1 = str1 + "	<td colspan='2' align='left'>Order Id : "+curOrder.orderId+"</td>";
+			 	str1 = str1 +"<td colspan='2' align='right'>Order Status : Delivered</td>";
+			 	str1 = str1 + "</tr>";
+			 	str1 = str1 +"</thead>";
+			 	str1 = str1 + "<tbody>";
+			 	var items = curOrder.items;
+			 	var total = 0 ;
+	      		for(var j = 0 ; j < items.length; j++ ){
+				 	str1 = str1 + "<tr>";
+				 	str1 = str1 + "<td class='col-md-3'<img class='item-image' src='images/cutting.png' style='width:10%'></td>";
+				 	str1 = str1 + "<td class='col-md-3'><span>"+items[j].name+"</span></td>";
+				 	str1 = str1 + "<td class='col-md-3'><img src='images/indian_rupee_sign_currency_symbol-512-white.png' style='width:7.5%'>&nbsp;"+items[j].price+"X" +items[j].qty+"</td>";
+				 	str1 = str1 + "<td class='col-md-3'><img src='images/indian_rupee_sign_currency_symbol-512-white.png' style='width:7.5%'>&nbsp;"+(items[j].price*items[j].qty)+"</td>";
+				 	str1 = str1 + "</tr>";
+				 	total = total + (items[j].price*items[j].qty);
+	      		}
+			 	
+			 	/*str1 = str1 +"</tbody>";
+			 	str1 = str1 + "<tfoot>";
+			 	str1 = str1 +"<tr>";
+			 	str1 = str1 +"<td colspan='3'>";
+			 	str1 = str1 + "<span>Total : </span>";
+				str1 = str1 +"</td>";
+				str1 = str1 + "<td>";
+				str1 = str1 + "<span><img src='images/indian_rupee_sign_currency_symbol-512-white.png' style='width:7.5%'>&nbsp;"+total+"</span>";
+				str1 = str1 + "</tr>";
+				str1 = str1 + "</tfoot>";*/
+		 	}
+		 	}
+			
+			$("#delivered").empty();
+			$("#delivered").append(str1);
+								
+			
+			var total = 0 ;						
+			for(var i = 0; i <allOrders.length ; i++){
+		 		var curOrder = allOrders[i];
+		 		var items = curOrder.items;
+
+	      		for(var j = 0 ; j < items.length; j++ ){
+	      			total = total + (items[j].price*items[j].qty);	
+	      		}	
+		 		
+			}
+			
+			str1 = str1 + "<thead>";
+			str1 = str1 + "<tr class='green'>";
+			str1 = str1 +"<td colspan='2' align='right'>Total: "+total+"</td>";
+			str1 = str1 + "</tr>";
+			str1 = str1 +"</thead>";
+							
+			$("#total").empty();
+			$("#total").append(str1);				
+								
+	      							
+	      							
+	      							
+	      							
+
+							
+							
+								
+								
+										
+									
+									
+										
+									
+								
+							
+		 	
+		 	$('#order-details').show();
+		 	$('#myModal').modal('hide');
+         });
+		
+		$('.want-more').click(function(e){
+			cartItems = [];
+			$('.item-updater').text(cartItems.length);
+			$('#order-details').hide();
+			$('#items-menu').show();
+		});
+		
+		        		//Give Up
+		$('.give-up').click(function(e){
+			
+			socket.emit('giveup', {"table":1});
+			$('#myModal2').modal();
+			
+  			//$('#cart-table tr').remove();
+		});
+		
+		Okbutton
+		
+		$('#Okbutton').click(function(e){
+			
+			
+			$('#myModal2').modal('hide');
+			
+  			
+		});
+				
+		
+		
+		$('.cart-image').bind('click', function(){
+			$('#myModal').modal();
+			
+			/* <tr>
+  			<td class="col-md-3"><img class="item-image" src="images/cutting.png" style="width:25%"></td>
+  			<td class="col-md-3"><span>Malai Chai</span></td>
+  			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;35 X 2</td>
+  			<td class="col-md-3"><img src="images/indian_rupee_sign_currency_symbol-512.png" style="width:12.5%">&nbsp;70</td>
+  			</tr> */
+  			$('#cart-table tr').remove();
+  			var str	=	"";
+  			
+  			if(cartItems.length > 0){
+		  		$.each( cartItems, function( key, value ) {
+		  			str	=	str	+	"<tr id="+value.attrId+">";
+		  			str	=	str	+	"<td class='col-md-3'><img class='item-image' src='"+value.imgId+"' style='width:25%'></td>";
+		  			str	=	str	+	"<td class='col-md-3'><span>"+value.name+"</span></td>";
+		  			str	=	str	+	"<td class='col-md-3'><img src='images/indian_rupee_sign_currency_symbol-512.png' style='width:12.5%'>&nbsp;"+value.price+" X "+value.qty+"</td>";
+		  			str	=	str	+	"<td class='col-md-3'><img src='images/indian_rupee_sign_currency_symbol-512.png' style='width:12.5%'>&nbsp;"+ parseInt(value.price)*parseInt(value.qty) +"</td>";
+		  			str	=	str	+	"<td><a class='cart-delete' id='123'><i class='fa fa-trash-o' aria-hidden='true'></i></a></td>"
+		  			str	=	str	+	"</tr>";
+		  		});
+  			}else{
+  				str	=	str	+	"<tr>";
+  				str	=	str	+	"<td>No items to show. Please add items to cart using 'Add to Cart' button<td>";
+  				str	=	str	+	"</tr>";
+  			}
+	  		//console.log(str);
+	  		$('#cart-table').append(str);
+		});
+		
+		$(document).on('click', 'a.cart-delete', function() {
+			var itemId	=	$(this).parents('tr').attr('id');
+			
+			for(var i=0; i<cartItems.length; i++){
+				console.log(cartItems[i]);
+				if(cartItems[i].attrId	==	itemId){
+					foundItem	=	i;
+					console.log(foundItem);
+				}
+			}
+			
+			if(foundItem != -1) {
+				cartItems.splice(foundItem, 1);
+			}
+			
+			$(this).parents('tr').remove();
+			
+			console.log(cartItems);
+			var str	=	"";
+			if(cartItems.length == 0){
+				str	=	str	+	"<tr>";
+  				str	=	str	+	"<td>No items to show. Please add items to cart using 'Add to Cart' button<td>";
+  				str	=	str	+	"</tr>";
+  				$('#cart-table').append(str);
+			}
+			$('.item-updater').text(cartItems.length)
+		}); 
+		
+	</script>
+    <script type="text/javascript" src="js/TweenLite.min.js"></script>
+    <script type="text/javascript" src="js/CSSPlugin.min.js"></script>
+    <script src="js/jquery.nicescroll.js"></script>
+    <script src="js/scripts.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

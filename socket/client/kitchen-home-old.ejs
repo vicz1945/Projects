@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Kit Fck</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <style>
+#accordion .panel-heading { padding: 0;}
+#accordion .panel-title > a {
+	display: block;
+	padding: 0.4em 0.6em;
+    outline: none;
+    font-weight:bold;
+    text-decoration: none;
+}
+
+#accordion .panel-title > a.accordion-toggle::before, #accordion a[data-toggle="collapse"]::before  {
+    content:"\e113";
+    float: left;
+    font-family: 'Glyphicons Halflings';
+	margin-right :1em;
+}
+#accordion .panel-title > a.accordion-toggle.collapsed::before, #accordion a.collapsed[data-toggle="collapse"]::before  {
+    content:"\e114";
+}
+
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+          $('.template').hide();
+        });
+        var socket = io.connect();
+        var hash = 0;
+        socket.on('connect', function () {
+         console.log("Client Connected");
+        });
+
+        socket.on('orders', function (msg) {
+            /*console.log(msg);
+            var detail = msg.items;
+            var len = detail.length;
+            for(var i = 0 ; i< len ; i++) {
+               var order = detail[i];
+               var item = order.name + "   " + order.qty;
+               console.log(order);
+                $("#orders").append("<p>"+item+"</p>");
+            }*/
+            
+            
+        	  var $template = $(".template");
+        
+        	 
+
+        	    //alert("Hello");
+        	      var $newPanel = $template.clone();
+        	      $newPanel = $newPanel.removeClass("template");
+        	      var tbodyContent = '';
+        	      var detail = msg.items;
+                var len = detail.length;
+                var eachrow = '';
+                for(var i = 0 ; i< len ; i++) {
+                  eachrow = eachrow + '<tr><td>'+ (i+1) + '</td><td>' + detail[i].name + '</td><td>' + detail[i].qty + '</tr>';
+                }
+                
+        	      $newPanel.find(".collapse").removeClass("in");
+        	      $newPanel.find(".accordion-toggle").attr("href",  "#" + (++hash))
+        	               .text("Table # " + msg.table);
+        	      //tbodyContent.append(eachrow)
+        	      //console.log($newPanel);
+        	      $newPanel.find('table>tbody').append(eachrow);
+        	      $newPanel.find(".panel-collapse").attr("id", hash).addClass("collapse").removeClass("in");
+        	      $("#accordion").append($newPanel.fadeIn());
+
+        	  
+          
+        });
+        
+        socket.on('message', function (msg) {
+          console.log(msg);
+        });
+        
+        
+
+    </script>
+  
+    
+  </head>
+  <body>
+    <div class="container">
+      <h3>Order Placed Are :</h3>
+      <div id = "orders"></div>
+    </div>
+    
+    
+    <div class="panel-group" id="accordion">
+  
+  <div class="panel panel-default template">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          Collapsible Group Item #2
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table class="table">
+		    <thead>
+		      <tr>
+		        <th>Item#</th>
+		        <th>Name</th>
+		        <th>Qty</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      
+		    </tbody>
+  		</table>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<!--<button class="btn btn-lg btn-primary btn-add-panel">
+    <i class="glyphicon glyphicon-plus"></i> Add new panel
+</button>-->
+    
+
+  </body>
+</html>

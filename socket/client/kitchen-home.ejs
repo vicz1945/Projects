@@ -1,0 +1,603 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Kitchen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Augment Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+    </script>
+    
+    <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rancho" rel="stylesheet">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        var orderPlaced = [];
+        var orderTable = [];
+        var curOrderId = 0;
+        $(document).ready(function(){
+          /*function setHeight() {
+            windowHeight = $(window).innerHeight();
+            $('.fleft').css('min-height', windowHeight);
+            $('.fright').css('min-height', windowHeight);
+          };
+          setHeight();
+          
+          $(window).resize(function() {
+            setHeight();
+          }); */ 
+            
+          $('.template').hide();
+          
+            $('.outter-wp').on("click", '.note', function(){
+                var orderId = $(this).closest('div').attr('id');
+                for(var i = 0; i <orderPlaced.length ; i++){
+    	      		var objOrder = orderPlaced[i];
+    	      		curOrderId = orderId;
+	      		if(objOrder.orderId==orderId)
+	      		{
+    	      		var str1 = "";
+    	      		var items = objOrder.items;
+    	      		for(var j = 0 ; j < items.length; j++ ){
+                        str1  = str1 + "<tr>";
+                        str1 = str1 + "<td class='col-md-3'><span>"+items[j].name+"</span></td>";
+                        str1 = str1 + "<td class='col-md-3'>"+items[j].qty+"</td>";
+                        str1 = str1 + "</tr>";
+    	      		}
+    	      		
+    	      		$(".modal-body tbody").empty();
+    	      		$(".modal-body tbody").append(str1);
+	      		}
+                }
+		      	
+   			    $("#myModal").modal();
+          })
+          
+        $(document).on("click", ".okButton", function(){
+          console.log("Inside Click");
+          var arrRow = $(this).closest('tr');
+          console.log(arrRow.find('input').val());
+            $('.quote-container').each(function(){
+              console.log("Inside Container");
+              //var eachRow = $(this).find('table .orderListTable>tbody>tr');
+              $(this).find('table.orderListTable>tbody>tr').each(function(){
+                console.log("Inside Each Row");
+                if ($(this).find('td:first-child').text() == arrRow.find('td:first-child').text()) {
+                  if (parseInt($(this).find('td:eq(1)').text()) <= parseInt(arrRow.find('td:eq(1)').text()))
+                    console.log("Hello");
+                    $(this).find('td:eq(2)').remove();
+                    $(this).append('<td>Yes</td>');
+                } else {
+                    console.log("Hi");
+                    $(this).find('td:eq(2)').remove();
+                    $(this).append('<td>No</td>');
+                }
+              });
+            });
+        });
+         
+          
+        var socket = io.connect();
+        var hash = 0;
+        socket.on('connect', function () {
+         console.log("Client Connected");
+        });
+
+        socket.on('orders', function (msg) {
+          //alert("Kitchen EJS");
+        
+        
+				orderPlaced.push(msg);
+				console.log(orderTable.length);
+				if (orderTable.length == 0) {
+				  console.log("Inside If");
+				  orderTable.push(parseInt(msg.table));
+				  var str1	=	"<div class='quote-container' id = "+msg.orderId+">";
+  				var str2	=	str1	+	"<i class='pin'></i>";
+  				var str3 = "";
+  				
+  				str3	=	str2	+	"<blockquote class='note grey' align='center' >";
+  				 //change sticky note color
+  				var str4	=	str3	+	"<span style='float:left;font-size:17px;'>Table : "+msg.table+
+  				  "<hr style='margin-top: 0px;margin-bottom: 0px; border-top: 1px solid black;'/></span>"; //change table number
+  				
+  			  for(var i = 0; i <orderPlaced.length ; i++){
+        		var objOrder = orderPlaced[i];
+        		
+      	      		
+      	      		var items = objOrder.items;
+      	      		//console.log(items);
+      	      		var str6  = str4 + "<table class='orderListTable' style='font-size:17px;'>";
+    
+      	      		for(var j = 0 ; j < items.length; j++ ){
+                    var str6  = str6 + "<tr>";
+                    str6 = str6 + "<td align='left' style='width:125px;'>"+items[j].name+"</td>";
+                    str6 = str6 + "<td>"+items[j].qty+"</td>";
+                    str6 = str6 + "</tr>";
+                    
+      	          }
+      	          str6 = str6 + "</table>";
+  	      		
+            }
+            str6	=	str6	+	"</span></blockquote></div>";
+  			   
+  				$('.fleft').append(str6);
+				}
+				
+				else if (orderTable.indexOf(msg.table) == -1){
+  				console.log("Inside else If");
+  				
+  			  orderTable.push(parseInt(msg.table));
+				  var str1	=	"<div class='quote-container' id = "+msg.orderId+">";
+  				var str2	=	str1	+	"<i class='pin'></i>";
+  				var str3 = "";
+  				
+  				str3	=	str2	+	"<blockquote class='note grey' align='center' >";
+  				 //change sticky note color
+  				var str4	=	str3	+	"<span style='float:left;font-size:17px;'>Table : "+msg.table+
+  				  "<hr style='margin-top: 0px;margin-bottom: 0px; border-top: 1px solid black;'/></span>"; //change table number
+  				
+  			  for(var i = 0; i <orderPlaced.length ; i++){
+        		var objOrder = orderPlaced[i];
+        		
+      	      		
+      	      		var items = objOrder.items;
+      	      		//console.log(items);
+      	      		var str6  = str4 + "<table class='orderListTable' style='font-size:17px;'>";
+    
+      	      		for(var j = 0 ; j < items.length; j++ ){
+                    var str6  = str6 + "<tr>";
+                    str6 = str6 + "<td align='left' style='width:125px;'>"+items[j].name+"</td>";
+                    str6 = str6 + "<td>"+items[j].qty+"</td>";
+                    str6 = str6 + "</tr>";
+                    
+      	          }
+      	          str6 = str6 + "</table>";
+  	      		
+            }
+            str6	=	str6	+	"</span></blockquote></div>";
+  			   
+  				$('.fleft').append(str6);
+  			  
+				} else {
+				  console.log("Inside else");
+				  console.log(msg);
+				  
+      	      		for(var j = 0 ; j < msg.items.length; j++ ){
+                    console.log("InnerFor");
+                    var str6  = str6 + "<tr>";
+                    str6 = str6 + "<td align='left' style='width:125px;'>"+msg.items[j].name+"</td>";
+                    str6 = str6 + "<td>"+msg.items[j].qty+"</td>";
+                    str6 = str6 + "</tr>";
+                    
+      	          }
+      	          
+  	      		
+            
+            
+				  $(".quote-container span").each(function () {
+				    if ($(this).text().indexOf(msg.table) != -1) {
+				      console.log("append if");
+				      $(this).parents(".quote-container").find("table.orderListTable>tbody").append(str6);
+				    } else {
+				      console.log("append else");
+				      //return false;
+				    }
+				  });
+				}
+				//console.log(msg);
+    		var stri = "";
+        if ($('.ordersPrepared tr').length == 1) {
+          //console.log("If");
+          //console.log(msg.items.length);
+          for(var j = 0 ; j < msg.items.length; j++ ){
+            
+    		    stri = stri + "<tr><td class='itemname'>"+msg.items[j].name+"</td><td class='qty'>"+msg.items[j].qty
+            +"</td><td><input type='text' class='quantityPrepared'style='width: 40px;'/></td>"+
+            "<td><button type='button' class='okButton'>Ok</button></td></tr>";
+            
+        		  
+          }
+        } else {
+            //console.log("Else");
+            
+            for(var j = 0 ; j < msg.items.length; j++ ){
+              //console.log("Inside For");
+              var flag = 0;
+              $('.ordersPrepared tbody tr').each(function(){
+                //console.log("Inside Row");
+                var itemname = $(this).find("td.itemname").html();
+          		  
+          		  if (msg.items[j].name == itemname) {
+          		    //console.log("Inner If");
+          		    var quantity=parseInt($(this).find("td.qty").html());
+          		    quantity = parseInt(msg.items[j].qty) + parseInt(quantity)
+          		    $(this).find("td.qty").html(quantity);
+          		    flag = 1;
+                  return false; 
+          		  } 
+              });
+              if (flag == 0) {
+                stri = stri + "<tr><td class='itemname'>"+msg.items[j].name+"</td><td class='qty'>"+msg.items[j].qty
+                  +"</td><td><input type='text' class='quantityPrepared' style='width: 40px;'/></td>"+
+                  "<td><button type='button' class='okButton'>Ok</button></td></tr>";
+              }
+            }
+        }
+				
+			  $('.ordersPrepared tbody').append(stri);
+			  
+			 
+        });
+        
+        socket.on('message', function (msg) {
+          console.log(msg);
+        });
+        
+        //Acknowledge
+        $("#ack").on('click',function(){
+            $("#"+curOrderId+ " blockquote").removeClass("grey");
+            $("#"+curOrderId+ " blockquote").removeClass("red");
+            $("#"+curOrderId+ " blockquote").addClass("green");
+            socket.emit('ack', curOrderId);
+            $('#myModal').modal('hide');
+        });
+        
+        //Deliver
+         $("#deliver").on('click',function(){
+            socket.emit('deliver', curOrderId);
+            $('#myModal').modal('hide');
+            $("#"+curOrderId).remove();
+            
+        });
+		    
+      });
+        
+        
+
+    </script>
+    
+    <style>
+    	.page-container{color:white}
+    	.top_menu{color:white}
+		.profile_details{float:left}
+		.user-details{margin:-22px 4.8em 0 3em}
+		.user-details h2{font-size:56px}
+		.outter-wp{margin-bottom:0px}
+		.user-info{float:left; width:89%}
+		.cart-info{float:left; margin-top: 5px; margin-bottom: 10px;}
+    	.item-image{width:50%}
+    	.item-table .dev-col{padding:25px; border:1px solid;}
+    	.item-table .col-md-6{padding-top:10px}
+    	.item-table h2, .item-table h1{margin-top:0px; margin-bottom:0px}
+    	.item-table .fa{color:white}
+    	.item-table input[type="text"]{color:black}
+    	#myModal table{text-align:center; font-size:22px}
+    	#myModal table tr td{padding:5px !important}
+    	.modal-header .close{font-size:45px}
+    	.modal-header{padding-top:5px; padding-bottom:5px}
+    	#myModal .order-details td{color:white}
+    	table{width:100%}
+    	.modal-dialog{width:35%}
+    	#myModal .item-image{width:12% !important}
+    	.modal-dialog{overflow-y: initial !important}
+		.modal-body{height: 460px;overflow-y: auto;width:100%}
+		.green{background-color:#2ecc71 !important; transform:rotate(2deg)}
+		.grey{background-color:#D3D3D3 !important;}
+		.yellow{background-color:#f1c40f !important;  transform:rotate(2deg)}
+		.red{background-color:#e74c3c;  transform:rotate(2deg)}
+		.modal-footer{padding:5px !important;}
+		th{text-align:center !important}
+		.table>thead>tr>th, .table>tbody>tr>td{padding:0px !important}
+		
+		.available {background-image: url(./images/restaurant-table-and-chairs-gray.png);background-size: 60%;height: 145px;background-repeat: no-repeat;background-position:center}
+		.occupied {background-image: url(./images/restaurant-table-and-chairs-green.png);background-size: 60%;height: 145px;background-repeat: no-repeat;background-position:center}
+		.ordered {background-image: url(./images/restaurant-table-and-chairs-yellow.png);background-size: 60%;height: 145px;background-repeat: no-repeat;background-position:center}
+		.finished {background-image: url(./images/restaurant-table-and-chairs-red.png);background-size: 60%;height: 145px;background-repeat: no-repeat;background-position:center}
+		
+		.modal.fade .modal-dialog {
+    -webkit-transform: scale(0.1);
+    -moz-transform: scale(0.1);
+    -ms-transform: scale(0.1);
+    transform: scale(0.1);
+    top: 300px;
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.modal.fade.in .modal-dialog {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform: translate3d(0, -300px, 0);
+    transform: translate3d(0, -300px, 0);
+    opacity: 1;
+}
+
+
+
+
+.quote-container {
+  margin-top: 30px;
+  margin-right: 75px;
+  position: relative;
+  width:25%;
+  float:left;
+}
+
+.note {
+  color: #333;
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+  /*padding: 20px;*/
+  box-shadow: 0 10px 10px 2px rgba(0,0,0,0.3);
+}
+
+.note .author {
+  display: block;
+  margin: 40px 0 0 0;
+  text-align: right;
+}
+
+
+.yellow {
+  background: #eae672;
+  -webkit-transform: rotate(2deg);
+  -moz-transform: rotate(2deg);
+  -o-transform: rotate(2deg);
+  -ms-transform: rotate(2deg);
+  transform: rotate(2deg);
+}
+
+
+.pin {
+  background-color: #aaa;
+  display: block;
+  height: 32px;
+  width: 2px;
+  position: absolute;
+  left: 50%;
+  top: -16px;
+  z-index: 1;
+}
+
+
+.pin:after {
+  background-color: #A31;
+  background-image: radial-gradient(25% 25%, circle, hsla(0,0%,100%,.3), hsla(0,0%,0%,.3));
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.1),
+              inset 3px 3px 3px hsla(0,0%,100%,.2),
+              inset -3px -3px 3px hsla(0,0%,0%,.2),
+              23px 20px 3px hsla(0,0%,0%,.15);
+  content: '';
+  height: 12px;
+  left: -5px;
+  position: absolute;
+  top: -10px;
+  width: 12px;
+}
+
+blockquote{font-size:48px}
+.pin:before {
+  background-color: hsla(0,0%,0%,0.1);
+  box-shadow: 0 0 .25em hsla(0,0%,0%,.1);
+  content: '';
+
+  height: 24px;
+  width: 2px;
+  left: 0;
+  position: absolute;
+  top: 8px;
+
+  transform: rotate(57.5deg);
+  -moz-transform: rotate(57.5deg);
+  -webkit-transform: rotate(57.5deg);
+  -o-transform: rotate(57.5deg);
+  -ms-transform: rotate(57.5deg);
+
+  transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -webkit-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  -o-transform-origin: 50% 100%;
+}
+
+.wrap {
+width: 100%;
+overflow:auto;
+}
+
+.fleft {
+    float:left; 
+    width: 70%;
+    background:blanchedalmond;
+    min-height: 500px;
+    border-right:1px solid black;
+}
+
+.fright {
+float: right;
+    background:lightcyan;
+    min-height: 500px;
+    width: 30%;
+}
+
+.container {
+    height: auto;
+    width: 100%;
+    color: #fff;
+}
+.div1 {
+    background: #555;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 25%;
+    }
+.div2 {
+    background: #ccc;
+    position: absolute;
+    top: 0;
+    left: 25%;
+    bottom: 0;
+    width: 75%;
+}
+
+.ordersPrepared tr td{
+  color:black;
+  
+}
+.ordersPrepared tbody {
+  text-align: center;
+}
+.okButton{
+    height: 30px;
+    width: 45px;
+    border-radius: 5px;
+    background-color: darkseagreen;
+    color: white;
+  
+}
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+         <div class="inner-content">
+             <div class="outter-wp">
+             	<div class="bottom-grids">
+					<div class="item-table">
+						<div align="center" style="font-size:50px">
+							<span>Manage Kitchen</span>  
+						</div>
+<!--						<div>
+							<button type="button" class="btn btn-default add-items">Add</button>
+						</div>-->
+					</div>
+					<!--<div class="clearfix"></div>-->
+				</div>
+  				  <div class="wrap">
+              <div class="fleft"></div>
+              <div class="fright">
+                <table class="ordersPrepared">
+                  <thead>
+                    <tr>
+                      <th>Item Name</th>
+                      <th>Qty</th>
+                      <th>Done</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!--<tr>
+                      <td>Malai Chai</td>
+                      <td>10</td>
+                      <td>
+                        <input type="text" style='width: 40px;'/>
+                        
+                      </td>
+                      <td>
+                        <button type="button" class="okButton">Ok</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Malai Chai</td>
+                      <td>10</td>
+                      <td>
+                        <input type="text" style='width: 40px;'/>
+                        
+                      </td>
+                      <td>
+                        <button type="button" class="okButton">Ok</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Malai Chai</td>
+                      <td>10</td>
+                      <td>
+                        <input type="text" style='width: 40px;'/>
+                        
+                      </td>
+                      <td>
+                        <button type="button" class="okButton">Ok</button>
+                      </td>
+                    </tr>-->
+                  </tbody>
+                </table>
+                
+              </div>
+            
+            </div>
+             </div>
+         </div>
+        <!--<div class="clearfix"></div>-->
+    </div>
+    
+    <!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h3 class="modal-title">Orders Details</h3>
+	      </div>
+	      <div class="modal-body">
+	      	<table id="cart-table" class="table table-bordred table-striped">
+	      		<thead>
+	      			<tr>
+	      				<th>Item Name</th>
+	      				<th>Quantity</th>
+	      			</tr>
+	      		</thead>
+	      		<tbody>
+		      	
+		      	</tbody>
+	      	</table>
+	      </div>
+	      <div class="modal-footer">
+	      	<table>
+	      		<tr>
+	      			<td align="left"><button type="button" id = "ack" class="btn btn-default">Acknowledged</button></td>
+	      			<td align="right"><button type="button" id = "deliver" class="btn btn-default">Delivered</button></td>
+	      		</tr>
+	      	</table>
+	      </div>
+	  </div>
+	</div>
+</div>
+
+	<script>		
+		$(document).ready(function(e){
+		//	$('.note').click(function(e){
+			//	$('#myModal').modal();
+		//	});
+			
+		
+			
+		
+		});
+	</script>
+    <script type="text/javascript" src="js/TweenLite.min.js"></script>
+    <script type="text/javascript" src="js/CSSPlugin.min.js"></script>
+    <script src="js/jquery.nicescroll.js"></script>
+    <script src="js/scripts.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

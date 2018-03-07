@@ -1,0 +1,351 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Augment Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+    </script>
+    
+    <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <link href="css/style2.css" rel='stylesheet' type='text/css' />
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rancho" rel="stylesheet">
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    
+    <script>
+
+        $(document).ready(function(){
+        	
+        var socket = io.connect();
+        var hash = 0;
+        var orderPlaced = [];
+        var orderDelivered = [];
+        var orderAck = [];
+        socket.on('connect', function () {
+         console.log("Client Connected");
+        });
+
+		socket.on('deliver', function (msg) {
+			console.log(msg);
+			orderDelivered.push(parseInt(msg));
+		});
+		
+		socket.on('ack', function (msg) {
+			orderAck.push(msg);
+		});
+		
+		
+		
+		 socket.on('logged', function (msg) {
+		 	//var tableid = msg.tableid;
+		 	var tableid = 1;
+        	$("#"+tableid+" tr:first-child td").removeClass("available");
+        	$("#"+tableid+" tr:first-child td").removeClass("ordered");
+        	$("#"+tableid+" tr:first-child td").removeClass("finished");
+        	
+        	$("#"+tableid+" tr:first-child td").addClass("occupied");
+		 });
+		 
+        socket.on('orders', function (msg) {
+        	var tableid = msg.table;
+        	$("#"+tableid+" tr:first-child td").removeClass("available");
+        	$("#"+tableid+" tr:first-child td").removeClass("occupied");
+        	$("#"+tableid+" tr:first-child td").removeClass("finished");
+        	
+        	$("#"+tableid+" tr:first-child td").addClass("ordered");
+        	orderPlaced.push(msg);
+        	
+        });
+        
+        socket.on('giveup', function (msg) {
+        	console.log(msg);
+        	var tableid = msg.table;
+        	$("#"+tableid+" tr:first-child td").removeClass("available");
+        	$("#"+tableid+" tr:first-child td").removeClass("ordered");
+        	$("#"+tableid+" tr:first-child td").removeClass("occupied");
+        	
+        	$("#"+tableid+" tr:first-child td").addClass("finished");
+        	orderPlaced.push(msg);
+        	
+        });
+        
+        //Invoice
+        $('.print-invoice').click(function(e){
+         	var tableid = $(this).closest('div').attr('id');
+         	$("#"+tableid+" tr:first-child td").removeClass("finished");
+        	$("#"+tableid+" tr:first-child td").removeClass("ordered");
+        	$("#"+tableid+" tr:first-child td").removeClass("occupied");
+        	
+        	$("#"+tableid+" tr:first-child td").addClass("available");
+         	
+        }); 	
+        
+        $('.check-order').click(function(e){
+				var tableId = $(this).closest('div').attr('id');
+				$("#myModal .modal-body").find("#cart-table").remove();
+				
+				
+				
+	      		console.log(orderDelivered);
+	      		var isDel = false;
+	      		for(var i = 0; i <orderPlaced.length ; i++){
+	      			var objOrder = orderPlaced[i];
+	      			if(objOrder.table==tableId)
+	      			{
+	      				for(var j = 0; j <orderDelivered.length ; j++){
+	      					var orderDel = 	orderDelivered[j];
+	      					if(objOrder.orderId == orderDel){
+	      						isDel = true;
+	      					}
+	      				}
+	      			}
+	      		}
+	      		
+	      		console.log(isDel);
+	      		var str1 = "<table id='cart-table' class='table table-bordred table-striped'>";
+	      		for(var i = 0; i <orderPlaced.length ; i++){
+	      			var objOrder = orderPlaced[i];
+	      			if(objOrder.table==tableId)
+	      			{
+	      				if((jQuery.inArray(objOrder.orderId, orderDelivered) == -1)){
+	      					//var str1= "";
+							str1 = str1 + "";
+							str1 = str1 + "<tr class='order-details yellow'>";
+				      		str1 = str1 + "<td colspan='2' align='left'>Order Id : "+objOrder.orderId+"</td>";
+				      		str1 = str1 + "<td colspan='2' align='right'>Order Status : In Process</td>";
+				      		str1 =str1 + "</tr>";
+	      				//}
+	      				var items = objOrder.items;
+	      				for(var j = 0 ; j < items.length; j++ ){
+				      		str1 = str1 +"<tr>";
+				      		str1 = str1 +"<td class='col-md-3'><img class='item-image' src='images/cutting.png' style='width:25%'></td>";
+				      		str1 = str1 +"<td class='col-md-3'><span>"+items[j].name+"</span></td>";
+				      		str1 = str1 +"<td class='col-md-3'><img src='images/indian_rupee_sign_currency_symbol-512.png' style='width:7.5%'>&nbsp;"+items[j].price+"X" +items[j].qty+"</td>";
+				      		str1 = str1 +"<td class='col-md-3''><img src='images/indian_rupee_sign_currency_symbol-512.png' style='width:7.5%'>&nbsp;"+(items[j].price*items[j].qty)+"</td>";
+				      		str1 =str1 + "</tr>";
+	      				}
+	      			}
+	      			}
+        		}
+        		
+        		if(isDel){
+        			
+        			for(var i = 0; i <orderPlaced.length ; i++){
+	      			var objOrder = orderPlaced[i];
+	      			if(objOrder.table==tableId)
+	      			{
+	      				
+	      				if((jQuery.inArray(objOrder.orderId, orderDelivered) != -1)){
+	      				//if(i==0){
+							str1 = str1 + "<tr class='order-details green'>";
+				      		str1 = str1 + "<td colspan='2' align='left'>Order Id : "+objOrder.orderId+"</td>";
+				      		str1 = str1 + "<td colspan='2' align='right'>Order Status : Delivered</td>";
+				      		str1 =str1 + "</tr>";
+	      				//}
+	      				var items = objOrder.items;
+	      				for(var j = 0 ; j < items.length; j++ ){
+				      		str1 = str1 +"<tr>";
+				      		str1 = str1 +"<td class='col-md-3'><img class='item-image' src='images/cutting.png' style='width:25%'></td>";
+				      		str1 = str1 +"<td class='col-md-3'><span>"+items[j].name+"</span></td>";
+				      		str1 = str1 +"<td class='col-md-3'><img src='images/indian_rupee_sign_currency_symbol-512.png' style='width:7.5%'>&nbsp;"+items[j].price+"X" +items[j].qty+"</td>";
+				      		str1 = str1 +"<td class='col-md-3''><img src='images/indian_rupee_sign_currency_symbol-512.png' style='width:7.5%'>&nbsp;"+(items[j].price*items[j].qty)+"</td>";
+				      		str1 =str1 + "</tr>";
+	      				}
+
+	      			}
+        		}
+        			
+        		}
+        		}
+        		
+	      		str1 = str1 + "</table>";
+	      		
+	      		$("#myModal .modal-body").append(str1);
+	      		$('#myModal').modal();
+	      		
+			});
+        
+        
+        });
+    	
+    </script>
+    
+    <style>
+    	.page-container{color:white}
+    	.top_menu{color:white}
+		.profile_details{float:left}
+		.user-details{margin:-22px 4.8em 0 3em}
+		.user-details h2{font-size:56px}
+		.outter-wp{margin-bottom:0px}
+		.user-info{float:left; width:89%}
+		.cart-info{float:left; margin-top: 5px; margin-bottom: 10px;}
+    	.item-image{width:50%}
+    	.item-table .dev-col{padding:25px; border:1px solid;}
+    	.item-table .col-md-6{padding-top:10px}
+    	.item-table h2, .item-table h1{margin-top:0px; margin-bottom:0px}
+    	.item-table .fa{color:white}
+    	.item-table input[type="text"]{color:black}
+    	#myModal table{text-align:center; font-size:22px}
+    	#myModal table tr td{padding:5px !important}
+    	.modal-header .close{font-size:45px}
+    	.modal-header{padding-top:5px; padding-bottom:5px}
+    	#myModal .order-details td{color:white}
+    	table{width:100%}
+    	.modal-dialog{width:80%}
+    	#myModal .item-image{width:12% !important}
+    	.modal-dialog{overflow-y: initial !important}
+		.modal-body{height: 480px;overflow-y: auto;width:100%}
+		.green{background-color:#2ecc71 !important}
+		.yellow{background-color:#f1c40f !important}
+		.modal-footer{padding:5px !important;}
+		
+		.refresh{background-image:none;}
+		.available {background-image: url(./images/restaurant-table-and-chairs-gray.png);background-size: 60%;height: 145px;background-repeat: no-repeat;background-position:center}
+		.occupied {background-image: url(./images/restaurant-table-and-chairs-green.png);background-size: 60%;height: 145px;background-repeat: no-repeat;background-position:center}
+		.ordered {background-image: url(./images/restaurant-table-and-chairs-yellow.png);background-size: 60%;height: 145px;background-repeat: no-repeat;background-position:center}
+		.finished {background-image: url(./images/restaurant-table-and-chairs-red.png);background-size: 60%;height: 145px;background-repeat: no-repeat;background-position:center}
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+         <div class="inner-content">
+             <div class="outter-wp">
+             	<div class="bottom-grids">
+					<div class="item-table">
+						<div align="center" style="font-size:50px">
+							<span>Manage Table</span>  
+						</div>
+						<div id="1" class="col-md-3 dev-col items">                                    
+	                      	<table>
+								<tr><td colspan="2" align="center" class="available"></td></tr>
+								<tr><td colspan="2" align="center"><h3 class="name">Table 1</h3></td></tr>
+								<tr>
+									<td align="center"><button class="btn btn-default check-order">Check Order</button></td>
+									<td align="center"><button class="btn btn-default print-invoice">Print Invoice</button></td>
+								</tr>
+							</table>
+						</div>
+						<div id="2" class="col-md-3 dev-col items">                                    
+	                      	<table>
+								<tr><td colspan="2" align="center" class="available"></td></tr>
+								<tr><td colspan="2" align="center"><h3 class="name">Table 2</h3></td></tr>
+								<tr>
+									<td align="center"><button class="btn btn-default check-order">Check Order</button></td>
+									<td align="center"><button class="btn btn-default print-invoice">Print Invoice</button></td>
+								</tr>
+							</table>
+						</div>
+						<div id="3" class="col-md-3 dev-col items">                                    
+	                      	<table>
+								<tr><td colspan="2" align="center" class="available"></td></tr>
+								<tr><td colspan="2" align="center"><h3 class="name">Table 3</h3></td></tr>
+								<tr>
+									<td align="center"><button class="btn btn-default check-order">Check Order</button></td>
+									<td align="center"><button class="btn btn-default print-invoice">Print Invoice</button></td>
+								</tr>
+							</table>
+						</div>
+						<div id="4" class="col-md-3 dev-col items">                                    
+	                      	<table>
+								<tr><td colspan="2" align="center" class="available"></td></tr>
+								<tr><td colspan="2" align="center"><h3 class="name">Table 4</h3></td></tr>
+								<tr>
+									<td align="center"><button class="btn btn-default check-order">Check Order</button></td>
+									<td align="center"><button class="btn btn-default print-invoice">Print Invoice</button></td>
+								</tr>
+							</table>
+						</div>
+						<div id="5" class="col-md-3 dev-col items">                                    
+	                      	<table>
+								<tr><td colspan="2" align="center" class="available"></td></tr>
+								<tr><td colspan="2" align="center"><h3 class="name">Table 5</h3></td></tr>
+								<tr>
+									<td align="center"><button class="btn btn-default check-order">Check Order</button></td>
+									<td align="center"><button class="btn btn-default print-invoice">Print Invoice</button></td>
+								</tr>
+							</table>
+						</div>
+						<div id="6" class="col-md-3 dev-col items">                                    
+	                      	<table>
+								<tr><td colspan="2" align="center" class="available"></td></tr>
+								<tr><td colspan="2" align="center"><h3 class="name">Table 6</h3></td></tr>
+								<tr>
+									<td align="center"><button class="btn btn-default check-order">Check Order</button></td>
+									<td align="center"><button class="btn btn-default print-invoice">Print Invoice</button></td>
+								</tr>
+							</table>
+						</div>
+						<div id="7" class="col-md-3 dev-col items">                                    
+	                      	<table>
+								<tr><td colspan="2" align="center" class="available"></td></tr>
+								<tr><td colspan="2" align="center"><h3 class="name">Table 7</h3></td></tr>
+								<tr>
+									<td align="center"><button class="btn btn-default check-order">Check Order</button></td>
+									<td align="center"><button class="btn btn-default print-invoice">Print Invoice</button></td>
+								</tr>
+							</table>
+						</div>
+						<div id="8" class="col-md-3 dev-col items">                                    
+	                      	<table>
+								<tr><td colspan="2" align="center" class="available"></td></tr>
+								<tr><td colspan="2" align="center"><h3 class="name">Table 8</h3></td></tr>
+								<tr>
+									<td align="center"><button class="btn btn-default check-order">Check Order</button></td>
+									<td align="center"><button class="btn btn-default print-invoice">Print Invoice</button></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+             </div>
+         </div>
+        <div class="clearfix"></div>
+    </div>
+    
+    <!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h3 class="modal-title">Orders Placed</h3>
+	      </div>
+	      <div class="modal-body">
+	      	
+	      </div>
+	      <div class="modal-footer">
+	      		<table class="table table-bordred table-striped" style="color:black">
+		      		<tr>
+		      			
+		      		</tr>
+		      	</table>
+	      </div>	
+	  </div>
+	</div>
+</div>
+
+	<script>		
+		$(document).ready(function(e){
+			
+		});
+	</script>
+    <script type="text/javascript" src="js/TweenLite.min.js"></script>
+    <script type="text/javascript" src="js/CSSPlugin.min.js"></script>
+    <script src="js/jquery.nicescroll.js"></script>
+    <script src="js/scripts.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
