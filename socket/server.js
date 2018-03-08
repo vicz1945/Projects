@@ -1,4 +1,4 @@
-//Node JS Server
+//Node JS Server  Test
 
 //Node Modules
 var http = require('http');
@@ -19,6 +19,7 @@ var kitchenRoute = require("./node_require/kitchen");
 var managerRoute = require("./node_require/manager");
 
 console.log('Run');
+console.log("Running");
 
 const path = require("path");
 
