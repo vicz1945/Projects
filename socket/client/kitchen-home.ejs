@@ -61,26 +61,64 @@
           })
           
         $(document).on("click", ".okButton", function(){
-          console.log("Inside Click");
-          var arrRow = $(this).closest('tr');
-          console.log(arrRow.find('input').val());
-            $('.quote-container').each(function(){
-              console.log("Inside Container");
-              //var eachRow = $(this).find('table .orderListTable>tbody>tr');
-              $(this).find('table.orderListTable>tbody>tr').each(function(){
-                console.log("Inside Each Row");
-                if ($(this).find('td:first-child').text() == arrRow.find('td:first-child').text()) {
-                  if (parseInt($(this).find('td:eq(1)').text()) <= parseInt(arrRow.find('td:eq(1)').text()))
-                    console.log("Hello");
-                    $(this).find('td:eq(2)').remove();
-                    $(this).append('<td>Yes</td>');
-                } else {
-                    console.log("Hi");
-                    $(this).find('td:eq(2)').remove();
-                    $(this).append('<td>No</td>');
-                }
+          
+            var arrRow = $(this).closest('tr');
+            
+            var totalQuantity = arrRow.find('td:eq(2)').find('input').val();
+            var remainingQuantity = totalQuantity;
+            if (totalQuantity > parseInt(arrRow.find('td:eq(1)').text())) {
+              alert("Entered quantity is less than total quantity"); 
+            } else {
+              
+              var flag = false;
+              $('.quote-container').each(function(){
+                
+                $(this).find('table.orderListTable>tbody>tr').each(function(){
+                  
+                  if (!flag) {
+                    
+                    if (!$(this).hasClass("checked")) {
+                      if ($(this).find('td:first-child').text() == arrRow.find('td:first-child').text()) {
+                        
+                       
+                        if (parseInt($(this).find('td:eq(1)').text()) <= totalQuantity) {
+                          if (parseInt($(this).find('td:eq(1)').text()) == totalQuantity) {
+                            $(this).find('td:eq(2)').remove();
+                            $(this).append('<td>Yes</td>');
+                            $(this).addClass('checked');
+                            totalQuantity = totalQuantity - parseInt($(this).find('td:eq(1)').text());
+                            flag = true;
+                          } else {
+                            $(this).find('td:eq(2)').remove();
+                            $(this).append('<td>Yes</td>');
+                            $(this).addClass('checked');
+                            totalQuantity = totalQuantity - parseInt($(this).find('td:eq(1)').text());
+                            flag = true;
+                          }
+                          
+                        } else {
+                          $(this).find('td:eq(2)').remove();
+                          flag = true;
+                        }
+                        
+                      } else {
+                        
+                      }
+                  }
+                  }
+                });
               });
-            });
+            
+            arrRow.find('td:eq(2)').find('input').val('');
+            
+            arrRow.find('td:eq(1)').text(parseInt(arrRow.find('td:eq(1)').text()) - remainingQuantity);
+            console.log(parseInt(arrRow.find('td:eq(1)').text()));  
+            if (parseInt(arrRow.find('td:eq(1)').text()) == 0) {
+              console.log("inside");
+              arrRow.remove();
+            }
+            //}
+            }
         });
          
           
