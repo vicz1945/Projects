@@ -59,6 +59,13 @@
 		      	
    			    $("#myModal").modal();
           })
+        
+        $(document).on("keypress keyup blur","input.quantityPrepared",function (event) {    
+           $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
           
         $(document).on("click", ".okButton", function(){
           
@@ -70,12 +77,12 @@
               alert("Entered quantity is less than total quantity"); 
             } else {
               
-              var flag = false;
+              // flag = false;
               $('.quote-container').each(function(){
                 
                 $(this).find('table.orderListTable>tbody>tr').each(function(){
                   
-                  if (!flag) {
+                  //if (!flag) {
                     
                     if (!$(this).hasClass("checked")) {
                       if ($(this).find('td:first-child').text() == arrRow.find('td:first-child').text()) {
@@ -83,30 +90,45 @@
                        
                         if (parseInt($(this).find('td:eq(1)').text()) <= totalQuantity) {
                           if (parseInt($(this).find('td:eq(1)').text()) == totalQuantity) {
-                            $(this).find('td:eq(2)').remove();
+                            $(this).find('td:eq(3)').remove();
                             $(this).append('<td>Yes</td>');
                             $(this).addClass('checked');
                             totalQuantity = totalQuantity - parseInt($(this).find('td:eq(1)').text());
-                            flag = true;
+                            //flag = true;
                           } else {
-                            $(this).find('td:eq(2)').remove();
+                            $(this).find('td:eq(3)').remove();
                             $(this).append('<td>Yes</td>');
                             $(this).addClass('checked');
                             totalQuantity = totalQuantity - parseInt($(this).find('td:eq(1)').text());
-                            flag = true;
+                            //flag = true;
                           }
                           
                         } else {
-                          $(this).find('td:eq(2)').remove();
-                          flag = true;
+                          //console.log("Here");
+                          
+                          var hiddenValue = 0;
+                          
+                          hiddenValue = parseInt($(this).find('.divOne').text()) + parseInt(totalQuantity)
+                          $(this).find('.divOne').text(hiddenValue);
+                          //console.log(parseInt($(this).find('.divOne').text()));
+                          console.log(parseInt($(this).find('td:eq(1)').text()));
+                          
+                          if (parseInt($(this).find('.divOne').text()) ==  parseInt($(this).find('td:eq(1)').text())){
+                            $(this).find('td:eq(3)').remove();
+                            $(this).append('<td>Yes</td>');
+                            $(this).addClass('checked');
+                            totalQuantity = totalQuantity - parseInt($(this).find('td:eq(1)').text());
+                            //flag = true;
+                          }
                         }
                         
                       } else {
                         
                       }
                   }
-                  }
+                  //}
                 });
+                
               });
             
             arrRow.find('td:eq(2)').find('input').val('');
@@ -119,6 +141,22 @@
             }
             //}
             }
+            var isCompleted = false;
+            $('.quote-container').each(function(){
+              $(this).find('table.orderListTable>tbody>tr').each(function(){
+                if (!isCompleted) {
+                  if ($(this).find('td:eq(2)').text() == "Yes") {
+                    
+                  } else {
+                    isCompleted = true;
+                  }
+                }
+              });
+              if (isCompleted == false) {
+                $(this).remove();
+              }
+            });
+            
         });
          
           
@@ -158,6 +196,7 @@
                     var str6  = str6 + "<tr>";
                     str6 = str6 + "<td align='left' style='width:125px;'>"+items[j].name+"</td>";
                     str6 = str6 + "<td>"+items[j].qty+"</td>";
+                    str6 = str6 + "<td style='visibility:hidden' class='divOne'>0</td>";
                     str6 = str6 + "</tr>";
                     
       	          }
@@ -193,7 +232,8 @@
       	      		for(var j = 0 ; j < items.length; j++ ){
                     var str6  = str6 + "<tr>";
                     str6 = str6 + "<td align='left' style='width:125px;'>"+items[j].name+"</td>";
-                    str6 = str6 + "<td>"+items[j].qty+"</td>";
+                    str6 = str6 + "<td>"+items[j].qty+"</td>"
+                    str6 = str6 + "<td style='visibility:hidden' class='divOne'>0</td>";
                     str6 = str6 + "</tr>";
                     
       	          }
@@ -212,7 +252,8 @@
                     console.log("InnerFor");
                     var str6  = str6 + "<tr>";
                     str6 = str6 + "<td align='left' style='width:125px;'>"+msg.items[j].name+"</td>";
-                    str6 = str6 + "<td>"+msg.items[j].qty+"</td>";
+                    str6 = str6 + "<td>"+msg.items[j].qty+"</td>"
+                    str6 = str6 + "<td style='visibility:hidden' class='divOne'>0</td>";
                     str6 = str6 + "</tr>";
                     
       	          }
