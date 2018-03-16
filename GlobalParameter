@@ -1,0 +1,18 @@
+package Tool;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class GlobalParameters {
+	public static String todaysDate				=	new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
+	public static String parent_folder_path		=	"C:\\Users\\n729501\\Desktop\\Sandy\\";
+	public static String ext_ref_folder_path	=	"C:\\TM";
+	public static String excel_tool_file_path	=	"C:\\Users\\n729501\\Desktop\\Sandy";
+	public static String talentFileExtRefName	=	"Demand Talent Mapping Details";
+	public static String convert_table_to_range_vbs_path	=	"C:\\Users\\n729501\\Desktop\\Sandy\\Tools\\rangeConverter.vbs";
+	public static String refresh_pivot_vbs_path	=	"C:\\Users\\n729501\\Desktop\\Sandy\\Tools\\refreshPivot.vbs";
+	
+	public static String demandFilePath;
+	public static String talentFilePath;
+	public static String excelToolFilePath	=	"C:\\Users\\n729501\\Desktop\\Sandy\\22022018_205145\\DU6Demands_AS - Updated -2018.xlsx";
+}
