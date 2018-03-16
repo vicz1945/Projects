@@ -1,0 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EmailSearcher {
+    static class searchMailConfig {
+        public static string[] extensionsArray  =   { ".pdf", ".doc", ".xls", ".ppt", ".vsd", ".zip", ".rar", ".txt", ".csv", ".proj" };
+        public static string[] extensionArray   =   { ".xlsx" };
+        public static String from               =   "Sandeep_Biswal@infosys.com";
+        public static String talentMailSub      =   "Aet06Bk talents";
+        public static String demandMailSub      =   "Aet06Bk Demand";
+        public static DateTime todaysDate       =   DateTime.Today;
+        public static String pathToSaveFile     =   "C:\\Users\\n729501\\Desktop\\Sandy\\";
+    }
+}
