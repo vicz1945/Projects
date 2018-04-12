@@ -1,0 +1,46 @@
+Dim wbLoc
+Set objExcel = CreateObject("Excel.Application")
+
+wbLoc	=	Replace(WScript.Arguments.Item(0),"?"," ")
+'MsgBox(wbLoc)
+
+Set objWB = objExcel.Workbooks.Open(wbLoc)
+
+objExcel.Visible = false
+objExcel.AskToUpdateLinks = False 
+objExcel.AlertBeforeOverwriting = False 
+
+objExcel.DisplayAlerts = false
+
+for each objWS in objWB.worksheets
+	If objWS.Name = "Summ-tmp" Then
+		for each objPT in objWS.pivottables
+			objPT.refreshtable
+		next
+        Exit For
+    End If
+next
+
+for each objWS in objWB.worksheets
+	If objWS.Name = "Summ-aggre" Then
+		for each objPT in objWS.pivottables
+			objPT.refreshtable
+		next
+        Exit For
+    End If
+next
+
+for each objWS in objWB.worksheets
+	If objWS.Name = "Summary(2)" Then
+		for each objPT in objWS.pivottables
+			objPT.refreshtable
+			objPT.ClearAllFilters
+		next
+        Exit For
+    End If
+next
+
+objExcel.ActiveWorkbook.Save
+objExcel.ActiveWorkbook.Close
+
+objExcel.Application.Quit
