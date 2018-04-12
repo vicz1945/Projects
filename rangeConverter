@@ -1,0 +1,25 @@
+Dim wbLoc
+Set objExcel = CreateObject("Excel.Application")
+
+wbLoc	=	Replace(WScript.Arguments.Item(0),"?"," ")
+'MsgBox(wbLoc)
+
+Set objWB = objExcel.Workbooks.Open(wbLoc)
+
+objExcel.Visible = false
+objExcel.AskToUpdateLinks = False 
+objExcel.AlertBeforeOverwriting = False 
+
+objExcel.DisplayAlerts = false
+
+for each objWS in objWB.worksheets
+	If objWS.Name = "Demand Details" Then
+		objWS.ListObjects(1).Unlist
+        Exit For
+    End If
+next
+
+objExcel.ActiveWorkbook.Save
+objExcel.ActiveWorkbook.Close
+
+objExcel.Application.Quit
